@@ -4,6 +4,7 @@
 # Direct port of the Arduino NeoPixel library strandtest example.  Showcases
 # various animations on a strip of NeoPixels.
 import time
+import random
 
 from neopixel import *
 
@@ -24,7 +25,7 @@ LED_STRIP = ws.WS2811_STRIP_GRB  # Strip type and colour ordering
 def twinkle(strip, color, wait_ms=100):
     while True:
         for i in range(strip.numPixels() / 30):
-            strip.setPixelColor(i, color)
+            strip.setPixelColor(random.randint(strip.numPixels()), color)
             strip.show()
             time.sleep(wait_ms / 1000)
 
