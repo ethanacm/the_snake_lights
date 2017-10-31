@@ -31,7 +31,7 @@ def twinkle(strip, color, wait_ms=100):
 
 def haloween(strip):
     while True:
-        for i in range(strip.numPixels):
+        for i in range(strip.numPixels()):
             strip.setPixelColor(i, Color(244, 156, 66))
 
 def colorWipe(strip, color, wait_ms=50):
