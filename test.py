@@ -25,7 +25,7 @@ LED_STRIP = ws.WS2811_STRIP_GRB  # Strip type and colour ordering
 def twinkle(strip, color, wait_ms=100):
     while True:
         for i in range(strip.numPixels() / 30):
-            strip.setPixelColor(random.randint(strip.numPixels()), color)
+            strip.setPixelColor(random.randint(0, strip.numPixels()), color)
             strip.show()
             time.sleep(wait_ms / 1000)
 
