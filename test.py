@@ -105,4 +105,5 @@ if __name__ == '__main__':
     strip.begin()
 
     print('Press Ctrl-C to quit.')
-    twinkle(strip, Color(127,127,127,))
+    #twinkle(strip, Color(127,127,127,))
+    haloween(strip)
