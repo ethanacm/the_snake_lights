@@ -30,8 +30,8 @@ def loop(strip, color1, color2, wait_ms=100):
         time.sleep(wait_ms/1000.0)
     for i in range(strip.numPixels() / 2):
         strip.setPixelColor(strip.numPixels() / 2 - i, color2)
-                strip.setPixelColor(strip.numPixels() / 2 + i, color2)
-                strip.show()		
+        strip.setPixelColor(strip.numPixels() / 2 + i, color2)
+        strip.show()
         time.sleep(wait_ms/1000.0)
 
 def random(strip):
