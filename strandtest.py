@@ -43,6 +43,12 @@ def random(strip):
 			time.sleep(.1)
 		strip.show()
 
+def allOneColor(strip, color):
+	for i in range(strip.numPixels()):
+        strip.setPixelColor(i, color)
+
+
+
 def twinkle(strip, color, wait_ms=100):
         for i in range(strip.numPixels() / 30):
             strip.setPixelColor(Random.randint(0, strip.numPixels()), color)
@@ -123,7 +129,7 @@ if __name__ == '__main__':
 		#twinkle(strip, Color(255, 255, 255))
 		# loop(strip, red, green, 100)
 		
-		
+		allOneColor(white)
 		print ('Color wipe animations.')
 		#colorWipe(strip, Color(255, 0, 0))  # Red wipe
 		#colorWipe(strip, Color(0, 255, 0))  # Blue wipe
@@ -133,7 +139,7 @@ if __name__ == '__main__':
 		#theaterChase(strip, Color(127,   0,   0))  # Red theater chase
 		#theaterChase(strip, Color(  0,   0, 127))  # Blue theater chase
 		print ('Rainbow animations.')
-		rainbow(strip)
+		#rainbow(strip)
 		#rainbowCycle(strip)
 		#theaterChaseRainbow(strip)
 		
