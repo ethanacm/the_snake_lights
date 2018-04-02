@@ -9,7 +9,7 @@ from neopixel import *
 import random as Random
 
 # LED strip configuration:
-LED_COUNT      = 200      # Number of LED pixels.
+LED_COUNT      = 300      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
@@ -22,6 +22,18 @@ LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 
 
 # Define functions which animate LEDs in various ways.
+def loop(strip, color1, color2, wait_ms=100):
+	for i in range(strip.numPixels() / 2):
+		strip.setPixelColor(i, color1)
+		strip.setPixelColor(strip.numPixels() - i, color1)
+		strip.show()
+		time.sleep(wait_ms/1000.0)
+	for i in range(strip.numPixels() / 2):
+                strip.setPixelColor(strip.numPixels() / 2 - i, color2)
+                strip.setPixelColor(strip.numPixels() / 2 + i, color2)
+                strip.show()		
+		time.sleep(wait_ms/1000.0)
+
 def random(strip):
 	for i in range(30):
 		color = Color(Random.randint(0, 255), Random.randint(0, 255), Random.randint(0, 255), Random.randint(0, 255))
@@ -30,6 +42,7 @@ def random(strip):
 			strip.setPixelColor(Random.randint(0, strip.numPixels()), color)
 			time.sleep(.1)
 		strip.show()
+
 def twinkle(strip, color, wait_ms=100):
         for i in range(strip.numPixels() / 30):
             strip.setPixelColor(Random.randint(0, strip.numPixels()), color)
@@ -102,19 +115,25 @@ if __name__ == '__main__':
 
 	print ('Press Ctrl-C to quit.')
 	while True:
+		white = Color(127, 127, 127)
+		red = Color(127,   0,   0)
+		blue = Color(  0,   255, 0)
+		green = Color(0, 255, 0)
 		#random(strip)
 		#twinkle(strip, Color(255, 255, 255))
+		# loop(strip, red, green, 100)
+		
 		
 		print ('Color wipe animations.')
-		colorWipe(strip, Color(255, 0, 0))  # Red wipe
-		colorWipe(strip, Color(0, 255, 0))  # Blue wipe
-		colorWipe(strip, Color(0, 0, 255))  # Green wipe
+		#colorWipe(strip, Color(255, 0, 0))  # Red wipe
+		#colorWipe(strip, Color(0, 255, 0))  # Blue wipe
+		#colorWipe(strip, Color(0, 0, 255))  # Green wipe
 		print ('Theater chase animations.')
-		theaterChase(strip, Color(127, 127, 127))  # White theater chase
-		theaterChase(strip, Color(127,   0,   0))  # Red theater chase
-		theaterChase(strip, Color(  0,   0, 127))  # Blue theater chase
+		#theaterChase(strip, Color(127, 127, 127))  # White theater chase
+		#theaterChase(strip, Color(127,   0,   0))  # Red theater chase
+		#theaterChase(strip, Color(  0,   0, 127))  # Blue theater chase
 		print ('Rainbow animations.')
 		rainbow(strip)
-		rainbowCycle(strip)
-		theaterChaseRainbow(strip)
+		#rainbowCycle(strip)
+		#theaterChaseRainbow(strip)
 		
