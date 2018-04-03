@@ -2,6 +2,7 @@
 # @author Ethan Cassel-Mace
 
 import StrandMethods
+import json
 from flask import Flask, render_template, request, make_response
 
 app = Flask(__name__)
@@ -12,7 +13,7 @@ def index():
     return 'home. do other stuff for lights'
 
 @app.route('/colors/<color>')
-def index(color):
+def colors(color):
     if color == 'blue':
         strip.allOneColor(StrandMethods.BLUE)
     elif color == 'red':
@@ -21,10 +22,10 @@ def index(color):
         strip.allOneColor(StrandMethods.GREEN)
     else:
         strip.allOneColor(StrandMethods.BLUE)
-    return
+    return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
 
 
 # Run the app.
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(host= '10.10.10.107',debug=True, port=8080)
