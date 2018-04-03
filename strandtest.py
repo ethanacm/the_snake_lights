@@ -5,6 +5,8 @@
 # various animations on a strip of NeoPixels.
 import time
 
+
+import colorsys
 from neopixel import *
 import random as Random
 
@@ -14,7 +16,7 @@ LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
-LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS = 150     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
@@ -40,13 +42,13 @@ def random(strip):
         for i in range(Random.randint(0,5)):
 
             strip.setPixelColor(Random.randint(0, strip.numPixels()), color)
-            time.sleep(.1)
+            
         strip.show()
 
 def allOneColor(strip, color):
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
-
+    strip.show()
 
 
 def twinkle(strip, color, wait_ms=100):
@@ -111,6 +113,13 @@ def theaterChaseRainbow(strip, wait_ms=50):
             for i in range(0, strip.numPixels(), 3):
                 strip.setPixelColor(i+q, 0)
 
+def HLSColor(hue, lightness, saturation):
+    hue = hue / 360.0
+    lightness = lightness / 100.0
+    saturation = saturation / 100.0
+    hls = colorsys.hls_to_rgb(hue, lightness, saturation)
+    return Color(int(hls[0] * 255), int(hls[1]* 255), int(hls[2] * 255))
+
 
 # Main program logic follows:
 if __name__ == '__main__':
@@ -119,29 +128,35 @@ if __name__ == '__main__':
     # Intialize the library (must be called once before other functions).
     strip.begin()
 
+
     print ('Press Ctrl-C to quit.')
+    val = 1
     while True:
-        white = Color(127, 127, 127)
+        white = Color(20, 20, 20)
         red = Color(127,   0,   0)
         blue = Color(  0,   255, 0)
         green = Color(0, 255, 0)
         #random(strip)
         #twinkle(strip, Color(255, 255, 255))
         # loop(strip, red, green, 100)
-
-        allOneColor(white)
-        time.sleep(2)
-        allOneColor(strip, Color(50, 50, 50))
-        time.sleep(2)
-        print ('Color wipe animations.')
+        
+        #'''
+	allOneColor(strip, HLSColor(val, 50, 100))
+        #allOneColor(strip, Color(val, val, val))
+        time.sleep(.05)
+	print(val)
+	val = (val + 1) % 360
+        #'''
+        
+        #print ('Color wipe animations.')
         #colorWipe(strip, Color(255, 0, 0))  # Red wipe
         #colorWipe(strip, Color(0, 255, 0))  # Blue wipe
         #colorWipe(strip, Color(0, 0, 255))  # Green wipe
-        print ('Theater chase animations.')
+        #print ('Theater chase animations.')
         #theaterChase(strip, Color(127, 127, 127))  # White theater chase
         #theaterChase(strip, Color(127,   0,   0))  # Red theater chase
         #theaterChase(strip, Color(  0,   0, 127))  # Blue theater chase
-        print ('Rainbow animations.')
+        #print ('Rainbow animations.')
         #rainbow(strip)
         #rainbowCycle(strip)
         #theaterChaseRainbow(strip)
