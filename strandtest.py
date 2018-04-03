@@ -141,11 +141,11 @@ if __name__ == '__main__':
         # loop(strip, red, green, 100)
         
         #'''
-	allOneColor(strip, HLSColor(val, 50, 100))
+        allOneColor(strip, HLSColor(val, 50, 100))
         #allOneColor(strip, Color(val, val, val))
         time.sleep(.05)
-	print(val)
-	val = (val + 1) % 360
+        print(val)
+        val = (val + 1) % 360
         #'''
         
         #print ('Color wipe animations.')
