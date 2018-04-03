@@ -8,6 +8,6 @@ for i in range(100):
 
 
 
-for i in range(300):
-    urllib2.urlopen('http://10.10.10.107:8080/led/' + str(i) + '&r=255&g=0&b=255')
-    time.sleep(50 / 1000.0)
+for i in range(5,300):
+    urllib2.urlopen('http://10.10.10.107:8080/led/' + str(i) + '?r=0&g=0&b=0')
+    #time.sleep(50 / 1000.0)

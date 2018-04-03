@@ -34,6 +34,13 @@ def led(i):
     strip.show()
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
+@app.route('/test')
+def test():
+    for i in range(300):
+        strip.set_pixel_color(i, 255, 0, 0)
+        strip.show()
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+
 # Run the app.
 if __name__ == '__main__':
     app.run(host= '10.10.10.107',debug=True, port=8080)
