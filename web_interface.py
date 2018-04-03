@@ -25,7 +25,7 @@ def colors(color):
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
 @app.route('/led/<i>')
-def colors(i):
+def led(i):
     r = request.args.get('r')
     g = request.args.get('g')
     b = request.args.get('b')
