@@ -24,7 +24,14 @@ def colors(color):
         strip.allOneColor(StrandMethods.BLUE)
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
+@app.route('/led/<i>')
+def colors(i):
+    r = request.args.get('r')
+    g = request.args.get('g')
+    b = request.args.get('b')
 
+    strip.set_pixel_color(int(i), int(r), int(g), int(b))
+    strip.show()
 
 # Run the app.
 if __name__ == '__main__':

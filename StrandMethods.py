@@ -29,6 +29,12 @@ class Strip:
         self.strip = Adafruit_NeoPixel(self.count, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, self.brightness, LED_CHANNEL, LED_STRIP)
         self.strip.begin()
 
+    def set_pixel_color(self, i, r, g, b):
+        self.strip.setPixelColor(i, Color(r, g, b))
+
+    def show(self):
+        self.strip.show()
+
     def loop(self, color1, color2, wait_ms=100):
         for i in range(self.strip.numPixels() / 2):
             self.strip.setPixelColor(i, color1)
