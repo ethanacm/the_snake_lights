@@ -6,7 +6,7 @@ import json
 from flask import Flask, render_template, request, make_response
 
 app = Flask(__name__)
-strip = StrandMethods.Strip(300, 150)
+strip = StrandMethods.Strip(300, 255)
 
 @app.route('/')
 def index():
@@ -32,6 +32,7 @@ def led(i):
 
     strip.set_pixel_color(int(i), int(r), int(g), int(b))
     strip.show()
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 # Run the app.
 if __name__ == '__main__':
